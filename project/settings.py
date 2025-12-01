@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from celery.schedules import crontab
 
 load_dotenv()
 
@@ -141,3 +142,10 @@ REST_FRAMEWORK = {
 # Celery
 CELERY_BROKER_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+
+CELERY_BEAT_SCHEDULE = {
+    'send_due_soon_every_30_min': {
+        'task': 'tasks.tasks.send_due_soon_notifications',
+        'schedule': crontab(minute='*/30'),
+    }
+}

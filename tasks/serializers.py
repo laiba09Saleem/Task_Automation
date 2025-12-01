@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from tasks.models import Task, TaskAssignment, Notification
+from tasks.models import Task, TaskAssignment, Notifications
 
 User = get_user_model
 
@@ -30,5 +30,5 @@ class TaskSerializer(serializers.ModelSerializer):
     
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Notification
+        model = Notifications
         fields = ['id','massage','crated_at','read']

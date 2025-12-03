@@ -1,0 +1,98 @@
+{% extends 'tasks/base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<style>
+  /* Page Background */
+  body {
+    background: #f6f8fc !important;
+  }
+
+  /* Card Look */
+  .auth-card {
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+    padding: 30px 25px;
+    background: #ffffff;
+  }
+
+  /* Inputs */
+  .auth-input {
+    border-radius: 12px !important;
+    height: 48px;
+    font-size: 15px;
+  }
+
+  .auth-input:focus {
+    border-color: #4f8cff !important;
+    box-shadow: 0 0 0 0.2rem rgba(79,140,255,0.25) !important;
+  }
+
+  /* Button */
+  .auth-btn {
+    height: 48px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /* Link Style */
+  .auth-text a {
+    color: #4f8cff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .auth-text a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .auth-card {
+      padding: 20px;
+    }
+  }
+</style>
+
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-4 col-md-6 col-11">
+
+    <div class="auth-card">
+
+      <h3 class="mb-3 text-center fw-bold" style="color:#333;">Create Account</h3>
+      <p class="text-center text-muted mb-4" style="font-size:14px;">Register to continue managing your tasks</p>
+
+      {% if error %}
+        <div class="alert alert-danger text-center">{{ error }}</div>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <input name="username" class="form-control auth-input" placeholder="Username" required>
+        </div>
+
+        <div class="mb-3">
+          <input name="email" type="email" class="form-control auth-input" placeholder="Email Address" required>
+        </div>
+
+        <div class="mb-3">
+          <input name="password" type="password" class="form-control auth-input" placeholder="Password" required>
+        </div>
+
+        <button class="btn btn-success w-100 auth-btn">Sign Up</button>
+      </form>
+
+      <p class="text-center mt-3 auth-text">
+        Already have an account?
+        <a href="{% url 'login' %}">Login</a>
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

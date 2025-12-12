@@ -1,0 +1,87 @@
+{% extends 'tasks/base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<style>
+  body {
+    background: #f6f8fc !important;
+  }
+
+  .auth-card {
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+    padding: 30px 25px;
+    background: #ffffff;
+  }
+
+  .auth-input {
+    border-radius: 12px !important;
+    height: 48px;
+    font-size: 15px;
+  }
+
+  .auth-input:focus {
+    border-color: #4f8cff !important;
+    box-shadow: 0 0 0 0.2rem rgba(79,140,255,0.25) !important;
+  }
+
+  .auth-btn {
+    height: 48px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .auth-text a {
+    color: #4f8cff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .auth-text a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .auth-card {
+      padding: 20px;
+    }
+  }
+</style>
+
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-4 col-md-6 col-11">
+
+    <div class="auth-card">
+
+      <h3 class="mb-3 text-center fw-bold" style="color:#333;">Login</h3>
+      <p class="text-center text-muted mb-4" style="font-size:14px;">Sign in to continue managing your tasks</p>
+
+      {% if error %}
+        <div class="alert alert-danger text-center">{{ error }}</div>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input name="username" class="form-control auth-input" placeholder="Username" required>
+        </div>
+
+        <div class="mb-3">
+          <input name="password" type="password" class="form-control auth-input" placeholder="Password" required>
+        </div>
+
+        <button class="btn btn-primary w-100 auth-btn">Login</button>
+      </form>
+
+      <p class="text-center mt-3 auth-text">
+        New user? <a href="{% url 'signup' %}">Create Account</a>
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

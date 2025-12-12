@@ -1,24 +1,24 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from tasks.models import Task, TaskAssignment, Notification
+from tasks.models import Task, TaskAssignment, Notifications
 
-User = get_user_model
+User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id','username','email','first_name','last_name']
 
-class TaskAssigmentSerializer(serializers.ModelSerializer):
+class TaskAssignmentSerializer(serializers.ModelSerializer):
     assignee = UserSerializer(read_only=True)
-    assignee_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), sourse='assignee', write_only=True)
+    assignee_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='assignee', write_only=True)
     class Meta:
         model = TaskAssignment
         fields = ['id', 'assignee','assignee_id','assigned_at','notified']
 
 class TaskSerializer(serializers.ModelSerializer):
-    created_by = UserSerializer(read_only_by=True)
-    assignments = TaskAssigmentSerializer(many=True, read_only=True)
+    created_by = UserSerializer(read_only=True)
+    assignments = TaskAssignmentSerializer(many=True, read_only=True)
     class Meta:
         model = Task
         fields = ['id','title','description','due_date','created_by','status','created_at','assignments']
@@ -30,5 +30,5 @@ class TaskSerializer(serializers.ModelSerializer):
     
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Notification
+        model = Notifications
         fields = ['id','massage','crated_at','read']

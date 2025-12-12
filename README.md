@@ -2,6 +2,9 @@
 
 A **real-world task automation system** designed for companies to efficiently manage employee tasks and deadlines. This system is perfect for internal use in organizations and demonstrates modern Django practices including API integration, authentication, CRUD operations, background tasks, and clean database design.
 
+**Live Demo:** https://task-automation-phi.vercel.app
+
+
 ---
 
 ## 🔥 Why This Project Is Valuable
